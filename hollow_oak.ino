@@ -3,6 +3,7 @@
 #include <EEPROM.h>
 #include "DNSServer.h"
 #include "web.hpp"
+#include "game_state.hpp"
 
 #define LOCAL_TEST_MODE
 
@@ -12,7 +13,16 @@ const byte DNS_PORT = 53;
 IPAddress ap_ip(10, 10, 10, 1);
 DNSServer dns_server;
 
+Token eula_accepted;
+Token power_on;
+
+void game_state_init(void) {
+  token_new(&eula_accepted, 0, "eula_accepted");
+  token_new(&power_on, 1, "power_on");
+}
+
 void setup() {
+  game_state_init();
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
   EEPROM.begin(256);

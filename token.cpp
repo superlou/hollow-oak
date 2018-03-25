@@ -2,8 +2,9 @@
 #include "memory.hpp"
 #include "token.hpp"
 
-void token_new(Token *token, int addr) {
+void token_new(Token *token, int addr, char* name) {
   token->addr = addr;
+  strcpy(token->name, name);
 }
 
 bool token_is_set(Token *token) {

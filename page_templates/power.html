@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <p><a href="/">Back to status</a></p>
+  <h1>Power Control</h1>
+  <p>Status: %s</p>
+  <p>Warning! Unstable configurations without stabilizer:</p>
+  <ul>
+    <li>chi + psi</li>
+    <li>psi + omega</li>
+  </ul>
+  <p>Transition requires stabilizer relocation.</p>
+
+  <form method="POST" action="/power">
+    <table>
+      <tr><th></th><th>Standby</th><th>Active</th></tr>
+      <tr><td>Stabilizer</td>%s</tr>
+      <tr><td>Chi</td>%s</tr>
+      <tr><td>Psi</td>%s</tr>
+      <tr><td>Omega</td>%s</tr>
+    </table>
+  </form>
+</body>
+</html>
