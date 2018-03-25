@@ -15,6 +15,7 @@ DNSServer dns_server;
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
+  EEPROM.begin(256);
 
   #ifndef LOCAL_TEST_MODE
     WiFi.mode(WIFI_AP);
