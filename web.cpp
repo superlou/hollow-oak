@@ -1,7 +1,6 @@
 #include <string.h>
 #include "memory.hpp"
 #include "template.hpp"
-#include "eula.hpp"
 #include "page_templates.hpp"
 #include "token.hpp"
 #include "web.hpp"
@@ -43,15 +42,11 @@ bool get_form_arg(ESP8266WebServer *server, char *arg_name, char *out, int max_l
 
 char send_buffer[4096];
 
-char html_template[] = "<!html>"
-"<head>"
-"</head>"
-"<body>"
-"%s"
-"</body>";
-
-void web_send_html(ESP8266WebServer *server, char *body) {
-  snprintf(send_buffer, 4096, html_template, body);
+void web_send_html(ESP8266WebServer *server, char *body, ...) {
+  va_list argptr;
+  va_start(argptr, body);
+  vsnprintf(send_buffer, 4096, body, argptr);
+  va_end(argptr);
   server->send(200, "text/html", send_buffer);
 }
 
@@ -63,11 +58,12 @@ void web_redirect(ESP8266WebServer *server, char *path) {
 char template_buffer[4096];
 
 void index_route(void) {
-  if (token_is_set(&eula_accepted)) {
-    web_send_html(&server, PAGE_TEMPLATE(index));
-  } else {
+  if (token_is_clear(&eula_accepted)) {
     web_redirect(&server, "eula");
+    return;
   }
+
+  web_send_html(&server, PAGE_TEMPLATE(index), "off - FAULT [<a href='/power'>restore</a>]");
 }
 
 void eula_route(void) {

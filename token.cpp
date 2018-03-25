@@ -11,6 +11,10 @@ bool token_is_set(Token *token) {
   return i ? true : false;
 }
 
+bool token_is_clear(Token *token) {
+  return !token_is_set(token);
+}
+
 void token_set(Token *token) {
   EEPROM.write(token->addr, true);
   EEPROM.commit();
