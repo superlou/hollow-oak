@@ -3,6 +3,7 @@
 #include <EEPROM.h>
 #include "DNSServer.h"
 #include "web.hpp"
+#include "music.hpp"
 #include "game_state.hpp"
 
 #define LOCAL_TEST_MODE
@@ -48,9 +49,11 @@ void setup() {
   #endif
 
   web_setup();
+  music_init(14);
 }
 
 void loop() {
+  music_process();
   dns_server.processNextRequest();
   web_handle_client();
 }
