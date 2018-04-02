@@ -2,12 +2,13 @@
 #include "web.hpp"
 #include "logs.hpp"
 
-char list_no_power[] = "<i>(inadequate power - not accessible)</i>";
-char list_with_power[] = "<ul>"
-"<li><a href='logs?id=0'>0 - Inspector: Q32. ATP result: pass.</a></li>"
-"<li><a href='logs?id=1'>1 - Assigned field agent: FA184. Pairing result: pass.</a></li>"
-"<li><a href='logs?id=2'>2 - TRANSCRIPTION [conf 97%]</a></li>"
-"</ul>";
+char list_no_power[] = "<i>(not accessible - insufficient power)</i>";
+char list_with_power[] = "<ol start=\"0\">"
+"<li><a href='logs?id=0'>Inspector: Q32. ATP result: pass.</a></li>"
+"<li><a href='logs?id=1'>Assigned field agent: FA184. Pairing result: pass.</a></li>"
+"<li><a href='logs?id=2'>TRANSCRIPTION [conf 97%]</a></li>"
+"<li><i>(remaining logs not accessible)</i></li>"
+"</ol>";
 
 typedef struct {
   char id[3];
