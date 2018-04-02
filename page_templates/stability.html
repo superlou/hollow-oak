@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <p><a href="/">Back to status</a></p>
+  <h1>Stability Calibration</h1>
+  <p>Adjust stability calibration parameters.</p>
+  <form method="POST" action="/stability">
+    <div>
+      Field magnitude: <input type="text" name="magnitude" value="%s"> dB
+    </div>
+    <div>
+      Flux polarity: <input type="text" name="flux" value="%s"> Hz
+    </div>
+    <div>
+      <input type="submit" value="Apply">
+    </div>
+  </form>
+</body>
+</html>

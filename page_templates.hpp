@@ -11,5 +11,7 @@ extern unsigned char page_templates_log_html[];
 extern unsigned int page_templates_log_html_len;
 extern unsigned char page_templates_power_html[];
 extern unsigned int page_templates_power_html_len;
+extern unsigned char page_templates_stability_html[];
+extern unsigned int page_templates_stability_html_len;
 
 #endif

@@ -16,10 +16,12 @@ DNSServer dns_server;
 
 Token eula_accepted;
 Token power_on;
+Token peak_calibration;
 
 void game_state_init(void) {
   token_new(&eula_accepted, 0, "eula_accepted");
   token_new(&power_on, 1, "power_on");
+  token_new(&peak_calibration, 2, "peak_calibration");
 }
 
 void setup() {
