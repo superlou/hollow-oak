@@ -52,8 +52,17 @@ void setup() {
   music_init(14);
 }
 
+void led_process(void) {
+  if (token_is_set(&power_on)) {
+    digitalWrite(LED_BUILTIN, LOW);
+  } else {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+}
+
 void loop() {
   music_process();
+  led_process();
   dns_server.processNextRequest();
   web_handle_client();
 }
