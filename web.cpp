@@ -100,12 +100,17 @@ void eula_form(void) {
   web_redirect(&server, "eula");
 }
 
+void cat_route(void) {
+  server.sendContent_P((char *)page_templates_cat_jpg, page_templates_cat_jpg_len - 1);
+}
+
 void web_setup(void) {
   server.on("/", HTTP_GET, index_route);
   server.on("/eula", HTTP_GET, eula_route);
   server.on("/eula", HTTP_POST, eula_form);
   server.on("/power", HTTP_GET, power_route);
   server.on("/power", HTTP_POST, power_form);
+  server.on("/cat.jpg", HTTP_GET, cat_route);
   server.on("/reset", HTTP_GET, [](){
     memory_clear();
     server.send(200, "text/plain", "Memory cleared.");

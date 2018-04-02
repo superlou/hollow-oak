@@ -5,8 +5,8 @@ $(echo "#define PAGE_TEMPLATES_HPP_" >> page_templates.hpp)
 $(echo "" >> page_templates.hpp)
 
 for filename in page_templates/*; do
-  array_name=${filename//[\/. ]/\_}""
-  array_len=${filename//[\/. ]/\_}
+  array_name=${filename//[\/. -]/\_}""
+  array_len=${filename//[\/. -]/\_}
   $(echo "extern unsigned char" $array_name"[];" >> page_templates.hpp)
   $(echo "extern unsigned int" $array_len"_len;" >> page_templates.hpp)
 done
