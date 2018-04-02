@@ -21,7 +21,7 @@ char log_0_text[] = "Field stabilization 4 dB below nominal. Flux polarity rever
 char log_1_subject[] = "Assigned field agent: FA184. Pairing result: pass.";
 char log_1_text[] = "Blood type A-, resting 68 BPM, peak 170 BPM. Initial pairing failed tolerance for beta2, beta3. Two doses 10 mg dextroamphetamine sulfate, 4 hours apart, pairing attempt successful.";
 char log_2_subject[] = "TRANSCRIPTION [conf 97%]";
-char log_2_text[] = "HELLO - IS THIS THING ON - CHECK 1 - CHECK 2 - HEY - WHERE IS THAT SUPPOSED TO -";
+char log_2_text[] = "HELLO - IS THIS THING ON - CHECK 1 - CHECK 2 - HEY - WHERE DO YOU THINK YOU'RE PUTTING -";
 
 LogBody logs[] = {
   { "0", log_0_subject, log_0_text },
