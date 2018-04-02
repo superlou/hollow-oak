@@ -5,6 +5,7 @@
 #include "game_state.hpp"
 #include "token.hpp"
 #include "power.hpp"
+#include "logs.hpp"
 #include "web.hpp"
 
 ESP8266WebServer server(80);
@@ -74,7 +75,12 @@ void index_route(void) {
   char power_status[64];
   power_status_msg(power_status);
 
-  web_send_html(&server, PAGE_TEMPLATE(index), power_status);
+  char test[] = "hello";
+  char *log_list;
+  logs_get_list(&log_list);
+  // log_list = test;
+
+  web_send_html(&server, PAGE_TEMPLATE(index), power_status, log_list);
 }
 
 void eula_route(void) {
@@ -110,6 +116,7 @@ void web_setup(void) {
   server.on("/eula", HTTP_POST, eula_form);
   server.on("/power", HTTP_GET, power_route);
   server.on("/power", HTTP_POST, power_form);
+  server.on("/logs", HTTP_GET, logs_route);
   server.on("/cat.jpg", HTTP_GET, cat_route);
   server.on("/reset", HTTP_GET, [](){
     memory_clear();
