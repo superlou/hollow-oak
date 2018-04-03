@@ -4,6 +4,7 @@
 #include "DNSServer.h"
 #include "web.hpp"
 #include "music.hpp"
+#include "led.hpp"
 #include "game_state.hpp"
 
 #define LOCAL_TEST_MODE
@@ -17,16 +18,18 @@ DNSServer dns_server;
 Token eula_accepted;
 Token power_on;
 Token peak_calibration;
+Token boundary_disabled;
 
 void game_state_init(void) {
   token_new(&eula_accepted, 0, "eula_accepted");
   token_new(&power_on, 1, "power_on");
   token_new(&peak_calibration, 2, "peak_calibration");
+  token_new(&boundary_disabled, 3, "boundary_disabled");
 }
 
 void setup() {
   game_state_init();
-  pinMode(LED_BUILTIN, OUTPUT);
+  led_init();
   Serial.begin(115200);
   EEPROM.begin(256);
 
@@ -52,14 +55,6 @@ void setup() {
 
   web_setup();
   music_init(14);
-}
-
-void led_process(void) {
-  if (token_is_set(&power_on)) {
-    digitalWrite(LED_BUILTIN, LOW);
-  } else {
-    digitalWrite(LED_BUILTIN, HIGH);
-  }
 }
 
 void loop() {

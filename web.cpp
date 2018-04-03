@@ -7,6 +7,7 @@
 #include "power.hpp"
 #include "logs.hpp"
 #include "stability.hpp"
+#include "boundary.hpp"
 #include "web.hpp"
 
 ESP8266WebServer server(80);
@@ -82,8 +83,11 @@ void index_route(void) {
   char *stability_status;
   stability_get_status(&stability_status);
 
+  char *boundary_status;
+  boundary_get_status(&boundary_status);
+
   web_send_html(&server, PAGE_TEMPLATE(index), power_status, stability_status,
-                log_list);
+                boundary_status, log_list);
 }
 
 void eula_route(void) {
@@ -122,6 +126,8 @@ void web_setup(void) {
   server.on("/logs", HTTP_GET, logs_route);
   server.on("/stability", HTTP_GET, stability_route);
   server.on("/stability", HTTP_POST, stability_form);
+  server.on("/boundary", HTTP_GET, boundary_route);
+  server.on("/boundary", HTTP_POST, boundary_form);
   server.on("/cat.jpg", HTTP_GET, cat_route);
   server.on("/reset", HTTP_GET, [](){
     memory_clear();
