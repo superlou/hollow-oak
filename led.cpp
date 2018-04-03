@@ -54,7 +54,6 @@ void led_process(void) {
     process_count();
     break;
   case LED_MODE_POWER:
-    Serial.println("here!");
   default:
     if (token_is_set(&power_on)) {
       led_on();
