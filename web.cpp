@@ -30,10 +30,10 @@ void handleNotFound(void) {
   server.send(404, "text/plain", message);
 }
 
-bool web_get_form_arg(ESP8266WebServer *server, char *arg_name, char *out, int max_length) {
-  for (uint8_t i = 0; i < server->args(); i++) {
-    if (strcmp(server->argName(i).c_str(), arg_name) == 0) {
-      strncpy(out, server->arg(i).c_str(), max_length);
+bool web_get_form_arg(char *arg_name, char *out, int max_length) {
+  for (uint8_t i = 0; i < server.args(); i++) {
+    if (strcmp(server.argName(i).c_str(), arg_name) == 0) {
+      strncpy(out, server.arg(i).c_str(), max_length);
       return true;
     }
   }
@@ -41,9 +41,9 @@ bool web_get_form_arg(ESP8266WebServer *server, char *arg_name, char *out, int m
   return false;
 }
 
-bool web_form_arg_present(ESP8266WebServer *server, char *arg_name) {
-  for (uint8_t i = 0; i < server->args(); i++) {
-    if (strcmp(server->argName(i).c_str(), arg_name) == 0) {
+bool web_form_arg_present(char *arg_name) {
+  for (uint8_t i = 0; i < server.args(); i++) {
+    if (strcmp(server.argName(i).c_str(), arg_name) == 0) {
       return true;
     }
   }
@@ -53,24 +53,24 @@ bool web_form_arg_present(ESP8266WebServer *server, char *arg_name) {
 
 char send_buffer[4096];
 
-void web_send_html(ESP8266WebServer *server, char *body, ...) {
+void web_render(char *body, ...) {
   va_list argptr;
   va_start(argptr, body);
   vsnprintf(send_buffer, 4096, body, argptr);
   va_end(argptr);
-  server->send(200, "text/html", send_buffer);
+  server.send(200, "text/html", send_buffer);
 }
 
-void web_redirect(ESP8266WebServer *server, char *path) {
-  server->sendHeader("Location", String(path), true);
-  server->send(302, "text/plain", "");
+void web_redirect(char *path) {
+  server.sendHeader("Location", String(path), true);
+  server.send(302, "text/plain", "");
 }
 
 char template_buffer[4096];
 
 void index_route(void) {
   if (token_is_clear(&eula_accepted)) {
-    web_redirect(&server, "eula");
+    web_redirect("eula");
     return;
   }
 
@@ -86,31 +86,31 @@ void index_route(void) {
   char *boundary_status;
   boundary_get_status(&boundary_status);
 
-  web_send_html(&server, PAGE_TEMPLATE(index), power_status, stability_status,
+  web_render(PAGE_TEMPLATE(index), power_status, stability_status,
                 boundary_status, log_list);
 }
 
 void eula_route(void) {
-  web_send_html(&server, PAGE_TEMPLATE(eula_normal));
+  web_render(PAGE_TEMPLATE(eula_normal));
 }
 
 void eula_form(void) {
   char serial[32];
   char accept[8];
 
-  if (web_get_form_arg(&server, "serial", serial, 32) &&
-      web_get_form_arg(&server, "accept", accept, 8))
+  if (web_get_form_arg("serial", serial, 32) &&
+      web_get_form_arg("accept", accept, 8))
   {
     if (strcmp(serial, "1450-3") == 0 &&
         strcmp(accept, "on") == 0)
     {
       token_set(&eula_accepted);
-      web_redirect(&server, "/");
+      web_redirect("/");
       return;
     }
   }
 
-  web_redirect(&server, "eula");
+  web_redirect("eula");
 }
 
 void cat_route(void) {

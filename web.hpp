@@ -10,9 +10,9 @@ extern ESP8266WebServer server;
 void handleNotFound(void);
 void web_setup(void);
 void web_handle_client(void);
-void web_send_html(ESP8266WebServer *server, char *body, ...);
-void web_redirect(ESP8266WebServer *server, char *path);
-bool web_get_form_arg(ESP8266WebServer *server, char *arg_name, char *out, int max_length);
-bool web_form_arg_present(ESP8266WebServer *server, char *arg_name);
+void web_render(char *body, ...);
+void web_redirect(char *path);
+bool web_get_form_arg(char *arg_name, char *out, int max_length);
+bool web_form_arg_present(char *arg_name);
 
 #endif

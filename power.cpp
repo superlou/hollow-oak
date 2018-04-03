@@ -79,7 +79,7 @@ void power_route(void) {
     }
   }
 
-  web_send_html(&server, PAGE_TEMPLATE(power), power_status, stabilizer_row,
+  web_render(PAGE_TEMPLATE(power), power_status, stabilizer_row,
                 chi_row, psi_row, omega_row);
 }
 
@@ -91,26 +91,26 @@ void reset_power_controls(void) {
 }
 
 void power_form(void) {
-  if (web_form_arg_present(&server, "stb+")) {
+  if (web_form_arg_present("stb+")) {
     stabilizer_active = true;
-  } else if (web_form_arg_present(&server, "stb-")) {
+  } else if (web_form_arg_present("stb-")) {
     stabilizer_active = false;
-  } else if (web_form_arg_present(&server, "chi+")) {
+  } else if (web_form_arg_present("chi+")) {
     chi_active = true;
     stabilizer_active = true;
-  } else if (web_form_arg_present(&server, "chi-")) {
+  } else if (web_form_arg_present("chi-")) {
     chi_active = false;
     stabilizer_active = false;
-  } else if (web_form_arg_present(&server, "psi+")) {
+  } else if (web_form_arg_present("psi+")) {
     psi_active = true;
     stabilizer_active = true;
-  } else if (web_form_arg_present(&server, "psi-")) {
+  } else if (web_form_arg_present("psi-")) {
     psi_active = false;
     stabilizer_active = false;
-  } else if (web_form_arg_present(&server, "omega+")) {
+  } else if (web_form_arg_present("omega+")) {
     omega_active = true;
     stabilizer_active = true;
-  } else if (web_form_arg_present(&server, "omega-")) {
+  } else if (web_form_arg_present("omega-")) {
     omega_active = false;
     stabilizer_active = false;
   }
@@ -137,5 +137,5 @@ void power_form(void) {
     }
   }
 
-  web_redirect(&server, "power");
+  web_redirect("power");
 }

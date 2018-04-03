@@ -26,10 +26,10 @@ void boundary_get_status(char **out) {
 
 void boundary_route(void) {
   if (token_is_set(&boundary_disabled)) {
-    web_redirect(&server, "/");
+    web_redirect("/");
   }
 
-  web_send_html(&server, PAGE_TEMPLATE(boundary));
+  web_render(PAGE_TEMPLATE(boundary));
 }
 
 char button_true[] = "quadrature";
@@ -39,13 +39,13 @@ void boundary_form(void) {
   adjusting = true;
   int pos = boundary_max - boundary;
 
-  if (web_form_arg_present(&server, button_true)) {
+  if (web_form_arg_present(button_true)) {
     if (order[pos]) {
       boundary--;
     } else {
       boundary++;
     }
-  } else if (web_form_arg_present(&server, button_false)) {
+  } else if (web_form_arg_present(button_false)) {
     if (!order[pos]) {
       boundary--;
     } else {
@@ -61,10 +61,10 @@ void boundary_form(void) {
     adjusting = false;
     led_do_power();
     token_set(&boundary_disabled);
-    web_redirect(&server, "/eula");
+    web_redirect("/eula");
     return;
   }
 
   led_do_count(boundary);
-  web_redirect(&server, "/boundary");
+  web_redirect("/boundary");
 }

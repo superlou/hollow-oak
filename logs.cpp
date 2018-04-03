@@ -41,7 +41,7 @@ void logs_route(void) {
   char id_str[8];
   int id;
 
-  if (!web_get_form_arg(&server, "id", id_str, 8)) {
+  if (!web_get_form_arg("id", id_str, 8)) {
     return;
   }
 
@@ -55,8 +55,8 @@ void logs_route(void) {
   }
 
   if (index == -1) {
-    web_redirect(&server, "/");
+    web_redirect("/");
   } else {
-    web_send_html(&server, PAGE_TEMPLATE(log), id_str, logs[index].subject, logs[index].text);
+    web_render(PAGE_TEMPLATE(log), id_str, logs[index].subject, logs[index].text);
   }
 }

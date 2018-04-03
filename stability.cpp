@@ -33,17 +33,17 @@ void stability_route(void) {
   itoa(magnitude, magnitude_str, 10);
   itoa(flux, flux_str, 10);
 
-  web_send_html(&server, PAGE_TEMPLATE(stability), magnitude_str, flux_str);
+  web_render(PAGE_TEMPLATE(stability), magnitude_str, flux_str);
 }
 
 void stability_form(void) {
   char magnitude_str[8];
   char flux_str[8];
 
-  if (!web_get_form_arg(&server, "magnitude", magnitude_str, 8) ||
-      !web_get_form_arg(&server, "flux", flux_str, 8))
+  if (!web_get_form_arg("magnitude", magnitude_str, 8) ||
+      !web_get_form_arg("flux", flux_str, 8))
   {
-    web_redirect(&server, "/stability");
+    web_redirect("/stability");
   }
 
   magnitude = atoi(magnitude_str);
@@ -55,5 +55,5 @@ void stability_form(void) {
     token_clear(&peak_calibration);
   }
 
-  web_redirect(&server, "/");
+  web_redirect("/");
 }
