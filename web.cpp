@@ -8,6 +8,7 @@
 #include "logs.hpp"
 #include "stability.hpp"
 #include "boundary.hpp"
+#include "eula.hpp"
 #include "web.hpp"
 
 ESP8266WebServer server(80);
@@ -74,6 +75,11 @@ void index_route(void) {
     return;
   }
 
+  if (token_is_set(&boundary_disabled) && token_is_clear(&eula2_passed)) {
+    web_redirect("eula");
+    return;
+  }
+
   char power_status[64];
   power_status_msg(power_status);
 
@@ -88,29 +94,6 @@ void index_route(void) {
 
   web_render(PAGE_TEMPLATE(index), power_status, stability_status,
                 boundary_status, log_list);
-}
-
-void eula_route(void) {
-  web_render(PAGE_TEMPLATE(eula_normal));
-}
-
-void eula_form(void) {
-  char serial[32];
-  char accept[8];
-
-  if (web_get_form_arg("serial", serial, 32) &&
-      web_get_form_arg("accept", accept, 8))
-  {
-    if (strcmp(serial, "1450-3") == 0 &&
-        strcmp(accept, "on") == 0)
-    {
-      token_set(&eula_accepted);
-      web_redirect("/");
-      return;
-    }
-  }
-
-  web_redirect("eula");
 }
 
 void cat_route(void) {
