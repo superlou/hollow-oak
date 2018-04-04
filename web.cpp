@@ -58,7 +58,7 @@ char send_buffer[4096];
 void web_render(char *body, ...) {
   va_list argptr;
   va_start(argptr, body);
-  vsnprintf(send_buffer, 4096, body, argptr);
+  vsnprintf_P(send_buffer, 4096, body, argptr);
   va_end(argptr);
   server.send(200, "text/html", send_buffer);
 }
