@@ -101,7 +101,7 @@ void index_route(void) {
 }
 
 void cat_route(void) {
-  server.sendContent_P((char *)page_templates_cat_jpg, page_templates_cat_jpg_len - 1);
+  server.sendContent_P((char *)images_cat_jpg, images_cat_jpg_len - 1);
 }
 
 void web_setup(void) {

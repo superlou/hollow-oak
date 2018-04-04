@@ -2,7 +2,7 @@
 #define WEB_H_
 
 #include <ESP8266WebServer.h>
-#include "page_templates.hpp"
+#include "assets.hpp"
 
 #define PAGE_TEMPLATE(x) ((char *)page_templates_ ## x ## _html)
 
