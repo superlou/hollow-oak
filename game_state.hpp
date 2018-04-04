@@ -8,5 +8,6 @@ extern Token power_on;
 extern Token peak_calibration;
 extern Token boundary_disabled;
 extern Token eula2_passed;
+extern Token cryptogram_solved;
 
 #endif

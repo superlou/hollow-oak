@@ -20,6 +20,7 @@ Token power_on;
 Token peak_calibration;
 Token boundary_disabled;
 Token eula2_passed;
+Token cryptogram_solved;
 
 void game_state_init(void) {
   token_new(&eula_accepted, 0, "eula_accepted");
@@ -27,6 +28,7 @@ void game_state_init(void) {
   token_new(&peak_calibration, 2, "peak_calibration");
   token_new(&boundary_disabled, 3, "boundary_disabled");
   token_new(&eula2_passed, 4, "eula2_passed");
+  token_new(&cryptogram_solved, 5, "cryptogram_solved");
 }
 
 void setup() {

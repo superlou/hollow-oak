@@ -9,6 +9,7 @@
 #include "stability.hpp"
 #include "boundary.hpp"
 #include "eula.hpp"
+#include "pairing.hpp"
 #include "web.hpp"
 
 ESP8266WebServer server(80);
@@ -83,6 +84,9 @@ void index_route(void) {
   char power_status[64];
   power_status_msg(power_status);
 
+  char *pairing_status;
+  pairing_get_status(&pairing_status);
+
   char *log_list;
   logs_get_list(&log_list);
 
@@ -92,8 +96,8 @@ void index_route(void) {
   char *boundary_status;
   boundary_get_status(&boundary_status);
 
-  web_render(PAGE_TEMPLATE(index), power_status, stability_status,
-                boundary_status, log_list);
+  web_render(PAGE_TEMPLATE(index), power_status, pairing_status,
+             stability_status, boundary_status, log_list);
 }
 
 void cat_route(void) {
@@ -111,6 +115,8 @@ void web_setup(void) {
   server.on("/stability", HTTP_POST, stability_form);
   server.on("/boundary", HTTP_GET, boundary_route);
   server.on("/boundary", HTTP_POST, boundary_form);
+  server.on("/pairing", HTTP_GET, pairing_route);
+  server.on("/pairing", HTTP_POST, pairing_form);
   server.on("/cat.jpg", HTTP_GET, cat_route);
   server.on("/reset", HTTP_GET, [](){
     memory_clear();
