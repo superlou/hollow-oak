@@ -19,7 +19,7 @@ char list_with_eula2_passed[] = "<ol start=\"0\">"
 "<li><a href='logs?id=6'>TRANSCRIPTION [conf 43%]</a></li>"
 "<li><a href='logs?id=7'>TRANSCRIPTION [conf 89%]</a></li>"
 "<li><a href='logs?id=8'>Log corrupted.</a></li>"
-"<li><i>(remaining memory corrupted</i></li>"
+"<li><i>(remaining memory corrupted)</i></li>"
 "</ol>";
 
 typedef struct {
