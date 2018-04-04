@@ -54,7 +54,7 @@ char log_2_text[] = "HELLO - IS THIS THING ON - CHECK 1 - CHECK 2 - HEY - WHERE 
 char log_3_subject[] = "TRANSCRIPTION [conf 93%]";
 char log_3_text[] = "ANOTHER PIECE OF GEAR I NEED TO CHARGE EVERY NIGHT - GREAT - END RECORDING - CUT RECORDING - DAMN IT - THAT'S RIGHT";
 char log_4_subject[] = "TRANSCRIPTION [conf 95%]";
-char log_4_text[] = "SO WE CAN'T USE STILLS AS EVIDENCE - WORTHLESS VENDOR CRAP - BUT AT LEAST I CAN KEEP THIS WITH ME<br><img src='/cat.jpg'>";
+char log_4_text[] = "SO WE CAN'T USE STILLS AS EVIDENCE - WORTHLESS VENDOR CRAP - BUT AT LEAST I CAN KEEP THIS WITH ME<br><img src='/IMG_20180401_063810.jpg'>";
 char log_5_subject[] = "TRANSCRIPTION [conf 98%]";
 char log_5_text[] = "NOTE TO SELF - GOT CHEWED OUT FOR LEAVING THIS P-O-S HOME - ALMOST WORTH IT";
 char log_6_subject[] = "TRANSCRIPTION [conf 43%]";
@@ -72,7 +72,7 @@ char log_10_text[] = "DAMN RIGHT - THOSE TWO GUYS ARE THE PALETTI BOYS - I PICKE
 char log_11_subject[] = "TRANSCRIPTION [conf 85%]";
 char log_11_text[] = "JENNY - JENNY. HAVE YOU SEEN MY LINK - THE LITTLE GRAY BOX - I NEED THAT BOX - I NEED IT - TELL ME YOU DIDN'T LOSE IT - I TOLD YOU HOW IMPORTANT IT WAS - WHY WOULD YOU MOVE IT - DAMN IT JENNY - WHY DID YOU MOVE IT - WHERE ARE YOU HIDING IT";
 char log_12_subject[] = "TRANSCRIPTION [conf 93%]";
-char log_12_text[] = "SHE CAN'T STOP ME. NONE OF THEM CAN STOP ME. I FOUND THE PROOF. CHECK THIS OUT<br><img src='/cat.jpg'>";
+char log_12_text[] = "SHE CAN'T STOP ME. NONE OF THEM CAN STOP ME. I FOUND THE PROOF. CHECK THIS OUT<br><img src='/IMG_20180404_191543.jpg'>";
 
 LogBody logs[] = {
   { "0", log_0_subject, log_0_text },

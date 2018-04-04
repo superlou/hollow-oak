@@ -104,6 +104,10 @@ void cat_route(void) {
   server.sendContent_P((char *)images_cat_jpg, images_cat_jpg_len - 1);
 }
 
+void image_quote_route(void) {
+  server.sendContent_P((char *)images_quote_jpg, images_quote_jpg_len - 1);
+}
+
 void web_setup(void) {
   server.on("/", HTTP_GET, index_route);
   server.on("/eula", HTTP_GET, eula_route);
@@ -117,7 +121,8 @@ void web_setup(void) {
   server.on("/boundary", HTTP_POST, boundary_form);
   server.on("/pairing", HTTP_GET, pairing_route);
   server.on("/pairing", HTTP_POST, pairing_form);
-  server.on("/cat.jpg", HTTP_GET, cat_route);
+  server.on("/IMG_20180401_063810.jpg", HTTP_GET, cat_route);
+  server.on("/IMG_20180404_191543.jpg", HTTP_GET, image_quote_route);
   server.on("/reset", HTTP_GET, [](){
     memory_clear();
     server.send(200, "text/plain", "Memory cleared.");

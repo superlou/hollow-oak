@@ -21,5 +21,7 @@ extern const PROGMEM unsigned char page_templates_stability_html[];
 extern unsigned int page_templates_stability_html_len;
 extern const PROGMEM unsigned char images_cat_jpg[];
 extern unsigned int images_cat_jpg_len;
+extern const PROGMEM unsigned char images_quote_jpg[];
+extern unsigned int images_quote_jpg_len;
 
 #endif
