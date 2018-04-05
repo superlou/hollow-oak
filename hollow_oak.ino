@@ -5,6 +5,7 @@
 #include "web.hpp"
 #include "music.hpp"
 #include "led.hpp"
+#include "morse.hpp"
 #include "game_state.hpp"
 
 #define LOCAL_TEST_MODE
@@ -38,6 +39,7 @@ void game_state_init(void) {
 void setup() {
   game_state_init();
   led_init();
+  morse_input_init(0);
   Serial.begin(115200);
   EEPROM.begin(256);
 
@@ -67,6 +69,7 @@ void setup() {
 
 void loop() {
   music_process();
+  morse_input_process();
   led_process();
   dns_server.processNextRequest();
   web_handle_client();
