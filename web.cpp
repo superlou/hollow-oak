@@ -10,6 +10,7 @@
 #include "boundary.hpp"
 #include "eula.hpp"
 #include "pairing.hpp"
+#include "led.hpp"
 #include "web.hpp"
 
 ESP8266WebServer server(80);
@@ -79,6 +80,10 @@ void index_route(void) {
   if (token_is_set(&boundary_disabled) && token_is_clear(&eula2_passed)) {
     web_redirect("eula");
     return;
+  }
+
+  if (token_is_set(&quote_solved) && token_is_clear(&morse_passed)) {
+    led_do_morse();
   }
 
   char power_status[64];
