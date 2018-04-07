@@ -68,8 +68,20 @@ void setup() {
 }
 
 void loop() {
+  if (token_is_between(&quote_solved, &morse_passed)) {
+    morse_input_process();
+    if (morse_is_in_msg()) {
+      led_do_off();
+    } else {
+      led_do_morse();
+    }
+  }
+
+  if (token_is_set(&morse_passed)) {
+    led_do_off();
+  }
+
   music_process();
-  morse_input_process();
   led_process();
   dns_server.processNextRequest();
   web_handle_client();

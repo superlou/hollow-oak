@@ -3,6 +3,7 @@
 #include "led.hpp"
 
 typedef enum {
+  LED_MODE_OFF,
   LED_MODE_POWER,
   LED_MODE_COUNT,
   LED_MODE_MORSE,
@@ -85,6 +86,9 @@ void process_morse() {
 
 void led_process(void) {
   switch(mode) {
+  case LED_MODE_OFF:
+    led_off();
+    break;
   case LED_MODE_COUNT:
     process_count();
     break;
@@ -114,7 +118,15 @@ void led_do_count(int _count) {
 }
 
 void led_do_morse(void) {
+  if (mode == LED_MODE_MORSE) {
+    return;
+  }
+
   mode = LED_MODE_MORSE;
   morse_pos = 0;
   morse_time = millis();
+}
+
+void led_do_off(void) {
+  mode = LED_MODE_OFF;
 }

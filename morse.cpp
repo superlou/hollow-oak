@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "morse.hpp"
+#include "game_state.hpp"
 
 typedef enum {
   DOWN, UP
@@ -28,14 +29,18 @@ unsigned long msg_break_gap = 2000;
 unsigned int spans[256];  // todo This should be protected from overflow
 int span_index = 0;
 
+bool morse_is_in_msg() {
+  return in_msg;
+}
+
 /**
  * Note that this cannot determine word breaks
  */
 void decode_morse_spans(unsigned int *spans, int len, char *msg) {
-  Serial.println("message stopped");
-  for (int i = 0; i < len; i++) {
-    Serial.println(spans[i]);
-  }
+  // Serial.println("message stopped");
+  // for (int i = 0; i < len; i++) {
+  //   Serial.println(spans[i]);
+  // }
 
   // Make a dit-dah threshold from the minimum gap
   int min = 2000;
@@ -89,6 +94,9 @@ void morse_input_process() {
   if (((now - time_last_change) > msg_break_gap) && in_msg) {
     decode_morse_spans(spans, span_index, msg);
     Serial.println(msg);
+    if (strcmp(msg, "-.--....") == 0) {
+      token_set(&morse_passed);
+    }
     in_msg = false;
     span_index = 0;
   }

@@ -9,6 +9,7 @@ typedef struct {
 void token_new(Token *token, int addr, char* name);
 bool token_is_set(Token *token);
 bool token_is_clear(Token *token);
+bool token_is_between(Token *complete, Token *incomplete);
 void token_set(Token *token);
 void token_clear(Token *token);
 

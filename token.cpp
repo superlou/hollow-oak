@@ -16,6 +16,10 @@ bool token_is_clear(Token *token) {
   return !token_is_set(token);
 }
 
+bool token_is_between(Token *complete, Token *incomplete) {
+  return (token_is_set(complete) && token_is_clear(incomplete));
+}
+
 void token_set(Token *token) {
   EEPROM.write(token->addr, true);
   EEPROM.commit();

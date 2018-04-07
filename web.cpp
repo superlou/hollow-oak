@@ -77,12 +77,12 @@ void index_route(void) {
     return;
   }
 
-  if (token_is_set(&boundary_disabled) && token_is_clear(&eula2_passed)) {
+  if (token_is_between(&boundary_disabled, &eula2_passed)) {
     web_redirect("eula");
     return;
   }
 
-  if (token_is_set(&quote_solved) && token_is_clear(&morse_passed)) {
+  if (token_is_between(&quote_solved, &morse_passed)) {
     led_do_morse();
   }
 

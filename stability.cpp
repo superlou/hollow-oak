@@ -5,13 +5,16 @@
 char no_power[] = "safety minimums";
 char borderline[] = "acceptable [<a href=\"stability\">calibrate</a>]";
 char peak[] = "peak [<a href=\"stability\">calibrate</a>]";
+char corrupted[] = "p#ak3!.\\n";
 
 int magnitude = 0;
 int flux = 0;
 
 void stability_get_status(char **out) {
   if (token_is_set(&power_on)) {
-    if (token_is_set(&peak_calibration)) {
+    if (token_is_between(&quote_solved, &morse_passed)) {
+      *out = corrupted;
+    } else if (token_is_set(&peak_calibration)) {
       *out = peak;
     } else {
       *out = borderline;
