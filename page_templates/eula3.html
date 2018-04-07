@@ -7,7 +7,7 @@
   <h2>Model PLS-32</h2>
   <form method="POST" action="/eula">
     <p>
-      <textarea disabled cols=60 rows=10>
+      <textarea id="agreement" disabled cols=60 rows=10>
   THIS END-USER LICENSE AGREEMENT (EULA) IS A LEGAL AGREEMENT BETWEEN THE END-USER CUSTOMER OF IRATEL, INC. (IRATEL) HARDWARE AND SOFTWARE PRODUCTS REGARDING CUSTOMER'S USE OF THE HARDWARE AND SOFTWARE. IRATEL IS WILLING TO LICENSE THE HARDWARE AND SOFTWARE TO CUSTOMER UPON THE CONDITION THAT IT ACCEPTS AND COMPLIES WITH THE TERMS CONTAINED IN THIS EULA PLUS ANY ADDITIONAL SUPPLEMENTAL TERMS AT THE TIME OF SALE, REPAIR, AND UPDATE. TO THE EXTENT OF ANY CONFLICT BETWEEN THE TERMS OF THIS EULA AND ANY SUPPLEMENTAL TERMS, THE SUPPLEMENTAL TERMS WILL APPLY TO THE APPLICABLE HARDWARE AND SOFTWARE.
 
   BY ACCEPTING THIS AGREEMENT OR USING, INSTALLING, OPERATING, OR HANDLING THESE HARDWARE AND SOFTWARE PRODUCTS, CUSTOMER ACKNOWLEDGES THAT IT HAS READ, UNDERSTANDS, AND AGREES TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS CONTRACT. IF CUSTOMER DOES NOT AGREE IS SHOULD NOT ACCEPT THIS AGREEMENT
@@ -17,5 +17,29 @@
     <p><input type="text" name="serial"> S/N</p>
     <p><input type="submit" value="Submit"></p>
   </form>
+  <script type="text/javascript">
+  function writeOverText(text, insert, position) {
+    var new_text = [
+      text.slice(0, position),
+      insert,
+      text.slice(position + insert.length)
+    ].join('');
+    return new_text;
+  }
+
+  function randomWrite() {
+    var textarea = document.getElementById('agreement');
+    var textLength = textarea.value.length;
+    var position = Math.floor(Math.random() * textLength);
+
+    var strings = ["here", "soon", "too", "bright"]
+    var insert = strings[Math.floor(Math.random() * strings.length)];
+
+    textarea.value = writeOverText(textarea.value, insert, position);
+    window.setTimeout(randomWrite, 200);
+  }
+
+  window.setTimeout(randomWrite, 200);
+  </script>
 </body>
 </html>
