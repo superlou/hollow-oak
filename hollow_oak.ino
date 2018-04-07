@@ -6,6 +6,7 @@
 #include "music.hpp"
 #include "led.hpp"
 #include "morse.hpp"
+#include "debug.hpp"
 #include "game_state.hpp"
 
 #define LOCAL_TEST_MODE
@@ -85,4 +86,5 @@ void loop() {
   led_process();
   dns_server.processNextRequest();
   web_handle_client();
+  debug_process();
 }
