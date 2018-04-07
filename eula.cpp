@@ -4,7 +4,9 @@
 #include "eula.hpp"
 
 void eula_route(void) {
-  if (token_is_set(&boundary_disabled) && token_is_clear(&eula2_passed)) {
+  if (token_is_set(&morse_passed)) {
+    web_render(PAGE_TEMPLATE(eula3));
+  } else if (token_is_between(&boundary_disabled, &eula2_passed)) {
     web_render(PAGE_TEMPLATE(eula2));
   } else {
     web_render(PAGE_TEMPLATE(eula_normal));

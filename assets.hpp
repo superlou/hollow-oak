@@ -7,6 +7,8 @@ extern const PROGMEM unsigned char page_templates_boundary_html[];
 extern unsigned int page_templates_boundary_html_len;
 extern const PROGMEM unsigned char page_templates_eula2_html[];
 extern unsigned int page_templates_eula2_html_len;
+extern const PROGMEM unsigned char page_templates_eula3_html[];
+extern unsigned int page_templates_eula3_html_len;
 extern const PROGMEM unsigned char page_templates_eula_normal_html[];
 extern unsigned int page_templates_eula_normal_html_len;
 extern const PROGMEM unsigned char page_templates_index_html[];

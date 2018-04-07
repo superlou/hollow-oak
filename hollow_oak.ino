@@ -11,7 +11,8 @@
 
 #define LOCAL_TEST_MODE
 
-char ssid[] = "PLS-32 MX PORT";
+char ssid1[] = "PLS-32 MX PORT";
+char ssid2[] = "hollow.oak";
 
 const byte DNS_PORT = 53;
 IPAddress ap_ip(10, 10, 10, 1);
@@ -37,6 +38,23 @@ void game_state_init(void) {
   token_new(&morse_passed, 7, "morse_passed");
 }
 
+void start_ap(void) {
+  WiFi.mode(WIFI_AP);
+  WiFi.softAPConfig(ap_ip, ap_ip, IPAddress(255, 255, 255, 0));
+
+  if (token_is_set(&morse_passed)) {
+    WiFi.softAP(ssid2);
+  } else {
+    WiFi.softAP(ssid1);
+  }
+
+  dns_server.start(DNS_PORT, "*", ap_ip);
+}
+
+void change_ap_to(char *ssid) {
+  WiFi.softAP(ssid);
+}
+
 void setup() {
   game_state_init();
   led_init();
@@ -45,10 +63,7 @@ void setup() {
   EEPROM.begin(256);
 
   #ifndef LOCAL_TEST_MODE
-    WiFi.mode(WIFI_AP);
-    WiFi.softAPConfig(ap_ip, ap_ip, IPAddress(255, 255, 255, 0));
-    WiFi.softAP(ssid);
-    dns_server.start(DNS_PORT, "*", ap_ip);
+    start_ap();
   #else
     WiFi.begin("meta_2g4", "galactica");
     Serial.print("Connecting to network");
@@ -70,7 +85,14 @@ void setup() {
 
 void loop() {
   if (token_is_between(&quote_solved, &morse_passed)) {
-    morse_input_process();
+    bool morse_just_passed = morse_input_process();
+
+    if (morse_just_passed) {
+      #ifndef LOCAL_TEST_MODE
+        change_ap_to(ssid2);
+      #endif
+    }
+
     if (morse_is_in_msg()) {
       led_do_off();
     } else {

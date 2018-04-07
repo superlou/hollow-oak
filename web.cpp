@@ -86,6 +86,11 @@ void index_route(void) {
     led_do_morse();
   }
 
+  if (token_is_set(&morse_passed)) {
+    web_redirect("eula"); // todo Only if dark! Otherwise, more puzzles
+    return;
+  }
+
   char power_status[64];
   power_status_msg(power_status);
 

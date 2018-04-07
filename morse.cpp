@@ -66,7 +66,7 @@ void decode_morse_spans(unsigned int *spans, int len, char *msg) {
   msg[msg_index] = '\0';
 }
 
-void morse_input_process() {
+bool morse_input_process() {
   int now = millis();
 
   if (key_is_down()) {
@@ -94,10 +94,13 @@ void morse_input_process() {
   if (((now - time_last_change) > msg_break_gap) && in_msg) {
     decode_morse_spans(spans, span_index, msg);
     Serial.println(msg);
-    if (strcmp(msg, "-.--....") == 0) {
-      token_set(&morse_passed);
-    }
     in_msg = false;
     span_index = 0;
+    if (strcmp(msg, "-.--....") == 0) {
+      token_set(&morse_passed);
+      return true;
+    }
   }
+
+  return false;
 }
