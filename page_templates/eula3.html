@@ -13,8 +13,8 @@
   BY ACCEPTING THIS AGREEMENT OR USING, INSTALLING, OPERATING, OR HANDLING THESE HARDWARE AND SOFTWARE PRODUCTS, CUSTOMER ACKNOWLEDGES THAT IT HAS READ, UNDERSTANDS, AND AGREES TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS CONTRACT. IF CUSTOMER DOES NOT AGREE IS SHOULD NOT ACCEPT THIS AGREEMENT
       </textarea>
     </p>
-    <p><input type="checkbox" name="accept"> Accept</p>
-    <p><input type="text" name="serial"> S/N</p>
+    <p><input type="checkbox" name="accept" id="accept"> Accept</p>
+    <p><input type="text" name="serial" id="serial"> S/N</p>
     <p><input type="submit" value="Submit"></p>
   </form>
   <script type="text/javascript">
@@ -37,6 +37,9 @@
 
     textarea.value = writeOverText(textarea.value, insert, position);
     window.setTimeout(randomWrite, 200);
+
+    document.getElementById('accept').checked = false;
+    document.getElementById('serial').value = "";
   }
 
   window.setTimeout(randomWrite, 200);

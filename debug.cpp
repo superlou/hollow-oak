@@ -10,7 +10,8 @@ Token *token_list[] = {
   &eula2_passed,
   &cryptogram_solved,
   &quote_solved,
-  &morse_passed
+  &morse_passed,
+  &music_passed
 };
 
 void list_tokens(void) {

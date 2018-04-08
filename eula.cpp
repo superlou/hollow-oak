@@ -1,6 +1,7 @@
 #include "web.hpp"
 #include "game_state.hpp"
 #include "token.hpp"
+#include "brightness.hpp"
 #include "eula.hpp"
 
 void eula_route(void) {
@@ -51,8 +52,18 @@ void check_eula2(void) {
   web_redirect("eula");
 }
 
+void check_eula3(void) {
+  if (brightness_is_dark()) {
+    web_redirect("/");
+  } else {
+    web_redirect("/eula");
+  }
+}
+
 void eula_form(void) {
-  if (token_is_set(&boundary_disabled) && token_is_clear(&eula2_passed)) {
+  if (token_is_set(&morse_passed)) {
+    check_eula3();
+  } else if (token_is_between(&boundary_disabled, &eula2_passed)) {
     check_eula2();
   } else {
     check_normal_eula();

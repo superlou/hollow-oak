@@ -3,29 +3,71 @@
 
 static int tone_pin;
 
-int s1_freqs[] = {
-  392, 523, 523, 523, 587, 659, 659, 659, 587, 523, 587, 659, 523,
-  659, 659, 698, 784, 784, 784, 698, 659, 698, 784, 659, 523, 523,
-  587, 659, 659, 659, 587, 523, 587, 659, 523, 392, 392, 523, 523,
-  523, 587, 659, 659, 659, 587, 523, 587, 659, 523
+int spider1_freqs[] = {
+  392, 523, 523, 523, 587, 659, 659
 };
-int s1_starts[] = {
-  1250, 1499, 1999, 2250, 2750, 3000, 3750, 4250, 4500, 5000, 5250,
-  5750, 6000, 7500, 8250, 8750, 9000, 9750, 10250, 10500, 11000,
-  11250, 11750, 12000, 13500, 14250, 14750, 15000, 15750, 16250,
-  16500, 17000, 17250, 17750, 18000, 18750, 19250, 19500, 20000,
-  20250, 20750, 21000, 21750, 22250, 22500, 23000, 23250, 23750, 24000
+int spider1_starts[] = {
+  0, 249, 749, 1000, 1500, 1750, 2500
 };
-int s1_stops[] = {
-  1486, 1973, 2236, 2723, 2986, 3711, 4223, 4486, 4973, 5236, 5723,
-  5986, 6711, 8211, 8723, 8986, 9711, 10223, 10486, 10973, 11236,
-  11723, 11986, 12711, 14211, 14723, 14986, 15711, 16223, 16486,
-  16973, 17236, 17723, 17986, 18711, 19223, 19486, 19973, 20236,
-  20723, 20986, 21711, 22223, 22486, 22973, 23236, 23723, 23986, 25423
+int spider1_stops[] = {
+  236, 723, 986, 1473, 1736, 2461, 2973
+};
+int spider2_freqs[] = {
+  659, 587, 523, 587, 659, 523
+};
+int spider2_starts[] = {
+  0, 249, 749, 1000, 1500, 1750
+};
+int spider2_stops[] = {
+  236, 723, 986, 1473, 1736, 2461
+};
+int spider3_freqs[] = {
+  659, 659, 698, 784
+};
+int spider3_starts[] = {
+  0, 750, 1250, 1499
+};
+int spider3_stops[] = {
+  711, 1223, 1486, 2686
+};
+int spider4_freqs[] = {
+  784, 698, 659, 698, 784, 659
+};
+int spider4_starts[] = {
+  0, 249, 749, 1000, 1500, 1750
+};
+int spider4_stops[] = {
+  236, 723, 986, 1473, 1736, 2461
+};
+int spider5_freqs[] = {
+  523, 523, 587, 659
+};
+int spider5_starts[] = {
+  0, 750, 1250, 1499
+};
+int spider5_stops[] = {
+  711, 1223, 1486, 2686
 };
 
-int s1_length = sizeof(s1_starts)/sizeof(s1_starts[0]);
-Song s1;
+Song spider1 = {
+  spider1_freqs, spider1_starts, spider1_stops, sizeof(spider1_starts)/sizeof(spider1_starts[0])
+};
+
+Song spider2 = {
+  spider2_freqs, spider2_starts, spider2_stops, sizeof(spider2_starts)/sizeof(spider2_starts[0])
+};
+
+Song spider3 = {
+  spider3_freqs, spider3_starts, spider3_stops, sizeof(spider3_starts)/sizeof(spider3_starts[0])
+};
+
+Song spider4 = {
+  spider4_freqs, spider4_starts, spider4_stops, sizeof(spider4_starts)/sizeof(spider4_starts[0])
+};
+
+Song spider5 = {
+  spider5_freqs, spider5_starts, spider5_stops, sizeof(spider5_starts)/sizeof(spider5_starts[0])
+};
 
 Song *now_playing = NULL;
 int now_playing_start;
@@ -33,12 +75,6 @@ int now_playing_index;
 
 void music_init(int pin) {
   tone_pin = pin;
-
-  s1.freqs = s1_freqs;
-  s1.starts = s1_starts;
-  s1.stops = s1_stops;
-  s1.length = s1_length;
-  song_start(&s1);
 }
 
 void start_tone(int freq) {

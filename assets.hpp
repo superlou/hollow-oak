@@ -13,6 +13,8 @@ extern const PROGMEM unsigned char page_templates_eula_normal_html[];
 extern unsigned int page_templates_eula_normal_html_len;
 extern const PROGMEM unsigned char page_templates_index_html[];
 extern unsigned int page_templates_index_html_len;
+extern const PROGMEM unsigned char page_templates_index_music_html[];
+extern unsigned int page_templates_index_music_html_len;
 extern const PROGMEM unsigned char page_templates_log_html[];
 extern unsigned int page_templates_log_html_len;
 extern const PROGMEM unsigned char page_templates_pairing_html[];

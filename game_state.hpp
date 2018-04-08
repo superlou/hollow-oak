@@ -11,5 +11,6 @@ extern Token eula2_passed;
 extern Token cryptogram_solved;
 extern Token quote_solved;
 extern Token morse_passed;
+extern Token music_passed;
 
 #endif

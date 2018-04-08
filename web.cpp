@@ -11,10 +11,14 @@
 #include "eula.hpp"
 #include "pairing.hpp"
 #include "led.hpp"
+#include "brightness.hpp"
+#include "music.hpp"
 #include "web.hpp"
 
 ESP8266WebServer server(80);
 char tmp[128];
+
+void index_music_form(void);
 
 void handleNotFound(void) {
   String message = "File Not Found\n\n";
@@ -87,8 +91,17 @@ void index_route(void) {
   }
 
   if (token_is_set(&morse_passed)) {
-    web_redirect("eula"); // todo Only if dark! Otherwise, more puzzles
-    return;
+    if (!brightness_is_dark()){
+      web_redirect("eula");
+      return;
+    }
+
+    if (token_is_set(&music_passed)) {
+      // continue with regular rendering
+    } else if (token_is_between(&morse_passed, &music_passed)){
+      web_render(PAGE_TEMPLATE(index_music));
+      return;
+    }
   }
 
   char power_status[64];
@@ -131,6 +144,7 @@ void web_setup(void) {
   server.on("/boundary", HTTP_POST, boundary_form);
   server.on("/pairing", HTTP_GET, pairing_route);
   server.on("/pairing", HTTP_POST, pairing_form);
+  server.on("/music", HTTP_POST, index_music_form);
   server.on("/IMG_20180401_063810.jpg", HTTP_GET, cat_route);
   server.on("/IMG_20180404_191543.jpg", HTTP_GET, image_quote_route);
   server.on("/reset", HTTP_GET, [](){
@@ -144,4 +158,36 @@ void web_setup(void) {
 
 void web_handle_client(void) {
   server.handleClient();
+}
+
+char music_pass[] = "12345212";
+char music_entry[] = "        ";
+unsigned char music_pass_len = sizeof(music_pass);
+
+void index_music_form(void) {
+  memmove(music_entry, music_entry + 1, music_pass_len - 2);
+  // music_entry[music_pass_len] = '\0';
+
+  if (web_form_arg_present("a")) {
+    song_start(&spider3);
+    music_entry[music_pass_len - 2] = '3';
+  } else if (web_form_arg_present("b")) {
+    song_start(&spider4);
+    music_entry[music_pass_len - 2] = '4';
+  } else if (web_form_arg_present("c")) {
+    song_start(&spider2);
+    music_entry[music_pass_len - 2] = '2';
+  } else if (web_form_arg_present("d")) {
+    song_start(&spider1);
+    music_entry[music_pass_len - 2] = '1';
+  } else if (web_form_arg_present("e")) {
+    song_start(&spider5);
+    music_entry[music_pass_len - 2] = '5';
+  }
+
+  if (strcmp(music_entry, music_pass) == 0) {
+    token_set(&music_passed);
+  }
+
+  web_redirect("/");
 }

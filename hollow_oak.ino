@@ -7,6 +7,7 @@
 #include "led.hpp"
 #include "morse.hpp"
 #include "debug.hpp"
+#include "brightness.hpp"
 #include "game_state.hpp"
 
 #define LOCAL_TEST_MODE
@@ -26,6 +27,7 @@ Token eula2_passed;
 Token cryptogram_solved;
 Token quote_solved;
 Token morse_passed;
+Token music_passed;
 
 void game_state_init(void) {
   token_new(&eula_accepted, 0, "eula_accepted");
@@ -36,6 +38,7 @@ void game_state_init(void) {
   token_new(&cryptogram_solved, 5, "cryptogram_solved");
   token_new(&quote_solved, 6, "quote_solved");
   token_new(&morse_passed, 7, "morse_passed");
+  token_new(&music_passed, 8, "music_passed");
 }
 
 void start_ap(void) {
@@ -59,6 +62,7 @@ void setup() {
   game_state_init();
   led_init();
   morse_input_init(0);
+  brightness_init(4);
   Serial.begin(115200);
   EEPROM.begin(256);
 
@@ -109,4 +113,5 @@ void loop() {
   dns_server.processNextRequest();
   web_handle_client();
   debug_process();
+  brightness_is_dark();
 }
