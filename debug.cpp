@@ -2,21 +2,9 @@
 #include "game_state.hpp"
 #include "debug.hpp"
 
-Token *token_list[] = {
-  &eula_accepted,
-  &power_on,
-  &peak_calibration,
-  &boundary_disabled,
-  &eula2_passed,
-  &cryptogram_solved,
-  &quote_solved,
-  &morse_passed,
-  &music_passed
-};
-
 void list_tokens(void) {
   Serial.println("== Tokens ==");
-  for (int i = 0; i < sizeof(token_list)/sizeof(token_list[0]); i++) {
+  for (int i = 0; i < TOKEN_COUNT; i++) {
     Serial.print(token_list[i]->addr);
     Serial.print(" ");
     Serial.print(token_list[i]->name);
@@ -40,7 +28,7 @@ void change_tokens(char *buffer, TokenOp op) {
   token = strtok(NULL, " ");
   while (token != NULL) {
     int id = atoi(token);
-    if ((id >= 0) && (id < sizeof(token_list)/sizeof(token_list[0]))) {
+    if ((id >= 0) && (id < TOKEN_COUNT)) {
       if (op == TOKEN_OP_CLEAR) {
         Serial.print("Clearing ");
         Serial.println(id);

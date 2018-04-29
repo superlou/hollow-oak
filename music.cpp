@@ -86,6 +86,12 @@ void stop_tone() {
   analogWrite(tone_pin, 0);
 }
 
+void music_note(int freq, int duration_ms) {
+  start_tone(freq);
+  delay(duration_ms);
+  stop_tone();
+}
+
 int freqs[] = {523, 587, 659, 698, 784, 880, 988, 1047};
 char num_freqs = sizeof(freqs) / sizeof(freqs[0]);
 int note = 0;

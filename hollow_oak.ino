@@ -19,28 +19,6 @@ const byte DNS_PORT = 53;
 IPAddress ap_ip(10, 10, 10, 1);
 DNSServer dns_server;
 
-Token eula_accepted;
-Token power_on;
-Token peak_calibration;
-Token boundary_disabled;
-Token eula2_passed;
-Token cryptogram_solved;
-Token quote_solved;
-Token morse_passed;
-Token music_passed;
-
-void game_state_init(void) {
-  token_new(&eula_accepted, 0, "eula_accepted");
-  token_new(&power_on, 1, "power_on");
-  token_new(&peak_calibration, 2, "peak_calibration");
-  token_new(&boundary_disabled, 3, "boundary_disabled");
-  token_new(&eula2_passed, 4, "eula2_passed");
-  token_new(&cryptogram_solved, 5, "cryptogram_solved");
-  token_new(&quote_solved, 6, "quote_solved");
-  token_new(&morse_passed, 7, "morse_passed");
-  token_new(&music_passed, 8, "music_passed");
-}
-
 void start_ap(void) {
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(ap_ip, ap_ip, IPAddress(255, 255, 255, 0));

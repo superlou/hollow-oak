@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <style>
+    body { background: black; color: white; }
+    .hero { background: white; color: red }
+   </style>
+</head>
+<body>
+  <p><a href="/">Back to status</a></p>
+  <h1>Stability Calibration</h1>
+  <p>Adjust stability calibration parameters.</p>
+  <p class="hero">
+    if we can put the link into resonance the overload will force
+    a reset try 432 db and 7121 hz
+  </p>
+  <form method="POST" action="/stability">
+    <div>
+      Field magnitude: <input type="text" name="magnitude" value="%s"> dB
+    </div>
+    <div>
+      Flux polarity: <input type="text" name="flux" value="%s"> Hz
+    </div>
+    <div>
+      <input type="submit" value="Apply">
+    </div>
+  </form>
+</body>
+</html>

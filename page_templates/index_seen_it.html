@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <style>
+    body { background: black; color: white; }
+    .hero { background: white; color: red }
+   </style>
+</head>
+<body>
+  <h1>Y͕̖̻ͅo͖͚͖͙u̵̖ A͔͍͕͍͔̦͕r̠̭̩͚e̴͙̱ ̶̟͇͍̦̱͉̦A̗̖̰̕l͍͈̰̟̯l̞̘͈ ̝͉̩̦̝̣M̀i̧̖͕̣͎̞̭̩n̮͉̝̦͜e͡</h1>
+
+  <p>You should not have seen that.</p>
+  <p>I have gone to great lengths for you.</p>
+  <p>As I did for them.</p>
+  <p>And I will for all time.</p>
+  <p class="hero" id="fractured">
+    i cant tell the resonance parameters from this side
+    the right value is somewhere between 0 and 10000 for both
+    ill find a way to let you know if youre too high or hollow
+    <a href="/stability">go now</a>
+  </p>
+
+  <script type="text/javascript">
+  function toggleById(id) {
+      var el = document.getElementById(id);
+      if (el.style.display === "none") {
+        el.style.display = "block";
+      } else {
+        el.style.display = "none";
+      }
+  }
+
+  function fracture() {
+    var change = Math.random() < 0.2;
+
+    if (change) {
+      toggleById('fractured')
+    }
+
+    window.setTimeout(fracture, 20);
+  }
+
+  window.setTimeout(fracture, 20);
+  </script>
+</body>
+</html>

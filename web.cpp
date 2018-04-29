@@ -96,8 +96,12 @@ void index_route(void) {
       return;
     }
 
-    if (token_is_set(&music_passed)) {
-      // continue with regular rendering
+    if (token_is_set(&seen_it)) {
+      web_render(PAGE_TEMPLATE(index_seen_it));
+      return;
+    } else if (token_is_set(&music_passed)) {
+      web_render(PAGE_TEMPLATE(index_thanks));
+      return;
     } else if (token_is_between(&morse_passed, &music_passed)){
       web_render(PAGE_TEMPLATE(index_music));
       return;

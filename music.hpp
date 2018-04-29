@@ -17,5 +17,6 @@ extern Song spider5;
 void music_init(int pin);
 void music_process(void);
 void song_start(Song *song);
+void music_note(int freq, int duration_ms);
 
 #endif
