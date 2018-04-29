@@ -15,6 +15,8 @@ extern const PROGMEM unsigned char page_templates_index_html[];
 extern unsigned int page_templates_index_html_len;
 extern const PROGMEM unsigned char page_templates_index_music_html[];
 extern unsigned int page_templates_index_music_html_len;
+extern const PROGMEM unsigned char page_templates_index_overloading_html[];
+extern unsigned int page_templates_index_overloading_html_len;
 extern const PROGMEM unsigned char page_templates_index_seen_it_html[];
 extern unsigned int page_templates_index_seen_it_html_len;
 extern const PROGMEM unsigned char page_templates_index_thanks_html[];

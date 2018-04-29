@@ -82,7 +82,7 @@ void loop() {
     }
   }
 
-  if (token_is_set(&morse_passed)) {
+  if (token_is_between(&morse_passed, &resonance_found)) {
     led_do_off();
   }
 

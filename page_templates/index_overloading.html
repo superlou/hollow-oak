@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #terminal { font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>PLS-32 Maintenance Port</h1>
+  <div id="terminal"></div>
+
+  <script type="text/javascript">
+  function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  var terminal = document.getElementById('terminal');
+
+  function print(text) {
+    terminal.innerHTML += text
+  }
+
+  function print_dot() {
+    print('.');
+    return sleep(500);
+  }
+
+  function ajax_get(path) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path);
+    xhr.send(null);
+  }
+
+  sleep(500).then(function() {
+    print('Emergency recovery activated');
+    ajax_get('/led/blink/slow');
+    return sleep(500);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('ready.<br>');
+    return sleep(500);
+  }).then(function() {
+    print('Identifying source');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('overload - resonance.<br>');
+    return sleep(1000);
+  }).then(function() {
+    print('Attempting link transient reinforcement');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('failed.<br>');
+    return sleep(1000);
+  }).then(function() {
+    print('Attempting automated recalibration');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('failed.<br>');
+    return sleep(2000);
+  }).then(function() {
+    print('Link termination stage 1');
+    ajax_get('/led/blink/fast');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('complete.<br>');
+    return sleep(1000);
+  }).then(function() {
+    print('Link termination stage 2');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('complete.<br>');
+    return sleep(1000);
+  }).then(function() {
+    print('Link termina�');
+    return sleep(100);
+  }).then(function() {
+    print('i');
+    return sleep(100);
+  }).then(function() {
+    print('m');
+    return sleep(100);
+  }).then(function() {
+    print(' ');
+    return sleep(100);
+  }).then(function() {
+    print('s');
+    return sleep(100);
+  }).then(function() {
+    print('o');
+    return sleep(100);
+  }).then(function() {
+    print(' ');
+    return sleep(100);
+  }).then(function() {
+    print('s');
+    return sleep(100);
+  }).then(function() {
+    print('o');
+    return sleep(100);
+  }).then(function() {
+    print('r');
+    return sleep(100);
+  }).then(function() {
+    print('r');
+    return sleep(100);
+  }).then(function() {
+    print('y');
+    return sleep(100);
+  }).then(function() {
+    print(' ');
+    return sleep(100);
+  }).then(function() {
+    print('j');
+    return sleep(100);
+  }).then(function() {
+    print('e');
+    return sleep(100);
+  }).then(function() {
+    print('n');
+    return sleep(100);
+  }).then(function() {
+    print('n');
+    return sleep(100);
+  }).then(function() {
+    print('y');
+    return sleep(100);
+  }).then(function() {
+    print(' ');
+    return sleep(100);
+  }).then(function() {
+    print('i');
+    return sleep(100);
+  }).then(function() {
+    print(' ');
+    return sleep(100);
+  }).then(function() {
+    print('l');
+    return sleep(100);
+  }).then(function() {
+    print('o');
+    return sleep(100);
+  }).then(function() {
+    print('�plete.<br>');
+    return sleep(1000);
+  }).then(function() {
+    print('Factory reset initiated ');
+    return sleep(1000);
+  }).then(function() {
+    print('5');
+    ajax_get('/beep');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('4');
+    ajax_get('/beep');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('3');
+    ajax_get('/beep');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('2');
+    ajax_get('/beep');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('1');
+    ajax_get('/beep');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    return sleep(250);
+  }).then(function() {
+    print('.');
+    ajax_get('/reset');
+    return sleep(2000);
+  }).then(function() {
+    ajax_get('/beep');
+    ajax_get('/led/on');
+    print('ready to reboot.<br>');
+  });
+
+  </script>
+</body>
+</html>

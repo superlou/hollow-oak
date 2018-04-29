@@ -4,9 +4,11 @@
 
 typedef enum {
   LED_MODE_OFF,
+  LED_MODE_ON,
   LED_MODE_POWER,
   LED_MODE_COUNT,
   LED_MODE_MORSE,
+  LED_MODE_BLINK,
 } LEDMode;
 
 LEDMode mode;
@@ -29,6 +31,10 @@ void led_on() {
 
 void led_off() {
   digitalWrite(LED_BUILTIN, HIGH);
+}
+
+void led_toggle() {
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
 }
 
 void process_count() {
@@ -84,16 +90,34 @@ void process_morse() {
   }
 }
 
+int blink_toggle_period = 1000;
+int blink_last_time = 0;
+
+void process_blink() {
+  unsigned long now = millis();
+
+  if ((now - blink_last_time) > blink_toggle_period) {
+    led_toggle();
+    blink_last_time = now;
+  }
+}
+
 void led_process(void) {
   switch(mode) {
   case LED_MODE_OFF:
     led_off();
+    break;
+  case LED_MODE_ON:
+    led_on();
     break;
   case LED_MODE_COUNT:
     process_count();
     break;
   case LED_MODE_MORSE:
     process_morse();
+    break;
+  case LED_MODE_BLINK:
+    process_blink();
     break;
   case LED_MODE_POWER:
   default:
@@ -129,4 +153,13 @@ void led_do_morse(void) {
 
 void led_do_off(void) {
   mode = LED_MODE_OFF;
+}
+
+void led_do_on(void) {
+  mode = LED_MODE_ON;
+}
+
+void led_do_blink(int period_ms) {
+  mode = LED_MODE_BLINK;
+  blink_toggle_period = period_ms / 2;
 }

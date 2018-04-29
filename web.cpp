@@ -58,12 +58,14 @@ bool web_form_arg_present(char *arg_name) {
   return false;
 }
 
-char send_buffer[4096];
+#define TEMPLATE_BUFFER_LEN 8192
+
+char send_buffer[TEMPLATE_BUFFER_LEN];
 
 void web_render(char *body, ...) {
   va_list argptr;
   va_start(argptr, body);
-  vsnprintf_P(send_buffer, 4096, body, argptr);
+  vsnprintf_P(send_buffer, TEMPLATE_BUFFER_LEN, body, argptr);
   va_end(argptr);
   server.send(200, "text/html", send_buffer);
 }
@@ -73,7 +75,7 @@ void web_redirect(char *path) {
   server.send(302, "text/plain", "");
 }
 
-char template_buffer[4096];
+char template_buffer[TEMPLATE_BUFFER_LEN];
 
 void index_route(void) {
   if (token_is_clear(&eula_accepted)) {
@@ -90,7 +92,7 @@ void index_route(void) {
     led_do_morse();
   }
 
-  if (token_is_set(&morse_passed)) {
+  if (token_is_between(&morse_passed, &resonance_found)) {
     if (!brightness_is_dark()){
       web_redirect("eula");
       return;
@@ -106,6 +108,11 @@ void index_route(void) {
       web_render(PAGE_TEMPLATE(index_music));
       return;
     }
+  }
+
+  if (token_is_set(&resonance_found)) {
+    web_render(PAGE_TEMPLATE(index_overloading));
+    return;
   }
 
   char power_status[64];
@@ -154,6 +161,26 @@ void web_setup(void) {
   server.on("/reset", HTTP_GET, [](){
     memory_clear();
     server.send(200, "text/plain", "Memory cleared.");
+  });
+  server.on("/beep", HTTP_GET, [](){
+    music_note(1000, 100);
+    server.send(200, "text/plain", "Beeped.");
+  });
+  server.on("/led/blink/slow", HTTP_GET, [](){
+    led_do_blink(500);
+    server.send(200, "text/plain", "Blinking.");
+  });
+  server.on("/led/blink/fast", HTTP_GET, [](){
+    led_do_blink(100);
+    server.send(200, "text/plain", "Blinking.");
+  });
+  server.on("/led/on", HTTP_GET, [](){
+    led_do_on();
+    server.send(200, "text/plain", "On.");
+  });
+  server.on("/led/off", HTTP_GET, [](){
+    led_do_off();
+    server.send(200, "text/plain", "Off.");
   });
   server.onNotFound(handleNotFound);
 
