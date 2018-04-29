@@ -1,6 +1,7 @@
 #include "web.hpp"
 #include "game_state.hpp"
 #include "token.hpp"
+#include "cstr_util.hpp"
 #include "pairing.hpp"
 
 char status_lost[] = "lost";
@@ -29,7 +30,9 @@ void pairing_form(void) {
 
   if (web_get_form_arg("token", token, 32))
   {
-    if (strstr(token, "thoreau") || strstr(token, "Thoreau")) {
+    cstr_to_lowercase(token, 32);
+
+    if (strstr(token, "thoreau")) {
       token_set(&cryptogram_solved);
     }
 

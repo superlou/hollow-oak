@@ -10,7 +10,7 @@
 #include "brightness.hpp"
 #include "game_state.hpp"
 
-#define LOCAL_TEST_MODE
+// #define LOCAL_TEST_MODE
 
 char ssid1[] = "PLS-32 MX PORT";
 char ssid2[] = "hollow.oak";

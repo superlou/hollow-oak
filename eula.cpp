@@ -2,6 +2,7 @@
 #include "game_state.hpp"
 #include "token.hpp"
 #include "brightness.hpp"
+#include "cstr_util.hpp"
 #include "eula.hpp"
 
 void eula_route(void) {
@@ -40,6 +41,8 @@ void check_eula2(void) {
   if (web_get_form_arg("serial", serial, 32) &&
       web_get_form_arg("accept", accept, 8))
   {
+    cstr_to_lowercase(serial, 32);
+
     if (strcmp(serial, "emptiness") == 0 &&
         strcmp(accept, "on") == 0)
     {
