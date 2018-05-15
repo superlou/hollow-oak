@@ -1,5 +1,7 @@
 #include "Arduino.h"
 #include "game_state.hpp"
+#include "music.hpp"
+#include "brightness.hpp"
 #include "debug.hpp"
 
 void list_tokens(void) {
@@ -43,6 +45,19 @@ void change_tokens(char *buffer, TokenOp op) {
   }
 }
 
+void test_hardware() {
+  Serial.println("Playing 440 Hz tone.");
+  music_note(440, 500);
+
+  Serial.print("Brightness: ");
+
+  if (brightness_is_dark()) {
+    Serial.println("dark.");
+  } else {
+    Serial.println("light.");
+  }
+}
+
 void handle_cmd(char *buffer) {
   if (strcmp(buffer, "tokens") == 0) {
     list_tokens();
@@ -50,6 +65,8 @@ void handle_cmd(char *buffer) {
     change_tokens(buffer, TOKEN_OP_CLEAR);
   } else if (strstr(buffer, "set ")) {
     change_tokens(buffer, TOKEN_OP_SET);
+  } else if (strcmp(buffer, "test") == 0) {
+    test_hardware();
   }
 }
 
