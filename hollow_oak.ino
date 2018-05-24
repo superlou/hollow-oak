@@ -47,7 +47,7 @@ void setup() {
   #ifndef LOCAL_TEST_MODE
     start_ap();
   #else
-    WiFi.begin("meta_2g4", "galactica");
+    WiFi.begin("ssid", "password");
     Serial.print("Connecting to network");
 
     while (WiFi.status() != WL_CONNECTED) {
